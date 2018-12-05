@@ -27,7 +27,7 @@ $Computers = Get-ADComputer -Filter * -Searchbase $GetModuleConfig.OU
 foreach ($computer in $computers)
 {
 	
-		Try
+	Try
 	{
 		Invoke-Command -ComputerName $Computer.name -ScriptBlock ('$ModuleRoot\config\netuser.cmd') -ErrorAction Stop
 	}
