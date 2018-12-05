@@ -8,7 +8,7 @@
 	 Filename:     	
 	===========================================================================
 	.DESCRIPTION
-		A description of the file.
+		Resets the local administrator password on all workstations within a Specific AD OU.
 #>
 
 $ModuleRoot = $PSScriptRoot
