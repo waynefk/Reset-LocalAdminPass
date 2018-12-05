@@ -1,0 +1,1 @@
+﻿invoke-commmand -computername Testing -scriptblock (Get-LocalUser -name "administrator")
