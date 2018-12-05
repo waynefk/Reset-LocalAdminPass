@@ -28,5 +28,5 @@ Try{
 Invoke-Command -ComputerName $Computers -ScriptBlock {('$ModuleRoot\config\netuser.cmd')}
 }
 Catch{
-$hostname | Out-file $ModuleRoot\failfile.txt
+$Computers | Out-file $ModuleRoot\failfile.txt
 }
