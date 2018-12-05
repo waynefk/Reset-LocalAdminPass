@@ -1,4 +1,4 @@
- <#	
+<#	
 	.NOTES
 	===========================================================================
 	 Created with: 	SAPIEN Technologies, Inc., PowerShell Studio 2018 v5.5.155
@@ -8,7 +8,7 @@
 	 Filename:     	
 	===========================================================================
 	.DESCRIPTION
-		Resets the local administrator password on all workstations within a Specific AD OU.
+		Resets the local administrator password on all workstations within a Specific AD OU
 #>
 
 $ModuleRoot = $PSScriptRoot
@@ -21,12 +21,18 @@ foreach ($File in $FunctionList)
 	. $File.FullName
 }
 
-$OUPath= (Get-ModuleConfig).OU
-$Computers = Get-ADComputer -Filter * -Searchbase $OUPath
+$GetModuleConfig = Get-ModuleConfig
+$Computers = Get-ADComputer -Filter * -Searchbase $GetModuleConfig.OU
 
-Try{
-Invoke-Command -ComputerName $Computers -ScriptBlock {('$ModuleRoot\config\netuser.cmd')}
-}
-Catch{
-$Computers | Out-file $ModuleRoot\failfile.txt -append
+foreach ($computer in $computers)
+{
+	
+		Try
+	{
+		Invoke-Command -ComputerName $Computer.name -ScriptBlock ('$ModuleRoot\config\netuser.cmd') -ErrorAction Stop
+	}
+	Catch
+	{
+		$Computer.name | Out-File "$ModuleRoot\FailFile.txt" -append
+	}
 }
