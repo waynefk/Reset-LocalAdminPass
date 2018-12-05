@@ -1,4 +1,4 @@
-﻿<#	
+ <#	
 	.NOTES
 	===========================================================================
 	 Created with: 	SAPIEN Technologies, Inc., PowerShell Studio 2018 v5.5.155
@@ -28,5 +28,5 @@ Try{
 Invoke-Command -ComputerName $Computers -ScriptBlock {('$ModuleRoot\config\netuser.cmd')}
 }
 Catch{
-$Computers | Out-file $ModuleRoot\failfile.txt
+$Computers | Out-file $ModuleRoot\failfile.txt -append
 }
