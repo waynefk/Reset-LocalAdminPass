@@ -24,4 +24,9 @@ foreach ($File in $FunctionList)
 $OUPath= (Get-ModuleConfig).OU
 $Computers = Get-ADComputer -Filter * -Searchbase $OUPath
 
+Try{
 Invoke-Command -ComputerName $Computers -ScriptBlock {('$ModuleRoot\config\netuser.cmd')}
+}
+Catch{
+$hostname | Out-file $ModuleRoot\failfile.txt
+}
